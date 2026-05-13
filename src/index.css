@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@custom-variant reveal (&.visible);
+
+:root {
+  --cream: #F8F5F0;
+  --warm-white: #FFFFFF;
+  --beige: #F0EDE6;
+  --stone: #D1CDC4;
+  --ink: #121211;
+  --ink-muted: #52504C;
+  --ink-faint: #9C9993;
+  --accent: #1A1A19;
+}
+
+@theme {
+  --color-cream: var(--cream);
+  --color-warm-white: var(--warm-white);
+  --color-beige: var(--beige);
+  --color-stone: var(--stone);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-accent: var(--accent);
+
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-dm-sans: 'DM Sans', sans-serif;
+  --font-switzer: 'Switzer', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-dm-sans);
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--stone);
+  border-radius: 10px;
+}
+
+/* Custom cursor base styles */
+.cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--ink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+
+.cursor-follower {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: 0.3;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Word Pull Up */
+@keyframes wordUp {
+  0% { transform: translateY(110%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-word-up {
+  animation: wordUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Section Label Styling */
+.section-label {
+  @apply text-[0.65rem] tracking-[0.4em] uppercase text-ink-faint flex items-center gap-8 mb-16 md:mb-24;
+}
+.section-label::after {
+  content: '';
+  @apply flex-1 h-[1px] bg-stone/30;
+}
